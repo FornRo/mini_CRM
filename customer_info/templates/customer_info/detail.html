@@ -1,0 +1,40 @@
+{% extends "layouts/base_generic.html" %}
+
+{% block content %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">name_company</th>
+                <td>{{ object.name_company }}</td>
+            </tr>
+            <tr>
+                <th scope="row">manager's name</th>
+                <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">description</th>
+                <td>{{ object.description }}</td>
+            </tr>
+            <tr>
+                <th scope="row">created_date</th>
+                <td>{{ object.created_date }}</td>
+            </tr>
+            <tr>
+                <th scope="row">change_date</th>
+                <td>{{ object.change_date }}</td>
+            </tr>
+            <tr>
+                <th scope="row">address</th>
+                <td>{{ object.address }}</td>
+            </tr>
+            <tr>
+                <th scope="row">phone_number</th>
+                <td>{{ object.phone_number }}</td>
+            </tr>
+            <tr>
+                <th scope="row">e_mail</th>
+                <td>{{ object.e_mail }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

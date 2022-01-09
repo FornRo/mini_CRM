@@ -1,0 +1,47 @@
+{% extends "layouts/base_generic.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    {% if object_list %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">name_company</th>
+              <th scope="col">name</th>
+              <th scope="col">last changed</th>
+              <th scope="col">description</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for object in object_list %}
+                <tr>
+                  <td><a href="{% url 'customer_info:detail' pk=object.id %}">{{ object.name_company }}</a></td>
+                  <td>{{ object.name }}</td>
+                    {% if object.change_date %}
+                      <td>{{ object.change_date }}</td>
+                    {% else %}
+                        <td>{{ object.created_date }}</td>
+                    {% endif %}
+                  <td>{{ object.description }}</td>
+                  <td>
+                      <label>update</label>
+                      <a href="{% url 'customer_info:update' pk=object.id %}"><img src="{% static 'img/update.svg' %}" height="25" alt=""></a>
+                      <label for="">del</label>
+                      <a href="{% url 'customer_info:delete' pk=object.id %}"><img src="{% static 'img/delete.svg' %}" height="25" alt=""></a>
+                      <i class="icofont-delete"></i>
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+    {% else %}
+        <p class="link-warning">Don't have records</p>
+
+    {% endif %}
+
+{% endblock %}
+
