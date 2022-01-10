@@ -1,0 +1,30 @@
+{% extends "layouts/base_generic.html" %}
+
+{% block content %}
+    <h3 class="text-info">Project</h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">name_project</th>
+                <td>{{ object.name_project }}</td>
+            </tr>
+            <tr>
+                <th scope="row">start_date</th>
+                <td>{{ object.start_date }}</td>
+            </tr>
+            <tr>
+                <th scope="row">end_date</th>
+                <td>{{ object.end_date }}</td>
+            </tr>
+            <tr>
+                <th scope="row">cost</th>
+                <td>{{ object.cost }} $</td>
+            </tr>
+            <tr>
+                <th scope="row">description</th>
+                <td>{{ object.description }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layouts/base_generic.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    {% if object_list %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">name_project</th>
+              <th scope="col">start_date</th>
+              <th scope="col">end_date</th>
+              <th scope="col">cost</th>
+              <th scope="col">#</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for object in object_list %}
+                <tr>
+                  <td><a href="{% url 'do_projects:detail' pk=object.id %}">{{ object.name_project }}</a></td>
+                  <td>{{ object.start_date }}</td>
+                  <td>{{ object.end_date }}</td>
+                  <td>{{ object.cost }}</td>
+                  <td>
+                      <label>update</label>
+                      <a href="{% url 'do_projects:update' pk=object.id %}"><img src="{% static 'img/update.svg' %}" height="25" alt=""></a>
+                      <label for="">del</label>
+                      <a href="{% url 'do_projects:delete' pk=object.id %}"><img src="{% static 'img/delete.svg' %}" height="25" alt=""></a>
+                      <i class="icofont-delete"></i>
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+    {% else %}
+        <p class="link-warning">Don't have records</p>
+
+    {% endif %}
+
+{% endblock %}
+
