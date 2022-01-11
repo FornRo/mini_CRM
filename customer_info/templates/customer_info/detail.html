@@ -27,13 +27,24 @@
                 <th scope="row">address</th>
                 <td>{{ object.address }}</td>
             </tr>
+
+        </tbody>
+    </table>
+    <table class="table">
+        <tbody>
             <tr>
                 <th scope="row">phone_number</th>
-                <td>{{ object.phone_number }}</td>
             </tr>
+
+            {% for values in object.phone_number.iterator %}
+            <tr class="table-info">
+                <td class="mb-lg-0">{{ values }}</td>
+            </tr>
+            {% endfor %}
+
             <tr>
                 <th scope="row">e_mail</th>
-                <td>{{ object.e_mail }}</td>
+                <td>{{ object.e_mail__set }}</td>
             </tr>
         </tbody>
     </table>
