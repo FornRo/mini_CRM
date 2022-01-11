@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'ckeditor',
+    'django_filters',
     # my app
     'customer_info',
+    'do_projects',
+    'cooperation',
 ]
 
 MIDDLEWARE = [
