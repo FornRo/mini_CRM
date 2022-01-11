@@ -1,16 +1,12 @@
-from django.urls import path, include
-from . import views
+from django.urls import path
+from .views import *
 
 
 urlpatterns = [
-    path('', include([
-        path('', views.CompanyListView.as_view(), name='list'),
-        path('<int:pk>', views.CompanyDetailView.as_view(), name='detail'),
+    path('', CompanyListView.as_view(), name='list'),
+    path('<int:pk>', CompanyDetailView.as_view(), name='detail'),
 
-        path(r'create/', views.CompanyCreateView.as_view(), name='create'),
-        path(r'<int:pk>/update/', views.CompanyUpdateView.as_view(), name='update'),
-        path(r'<int:pk>/delete/', views.CompanyDeleteView.as_view(), name='delete'),
-    ])
-         ),
-
+    path(r'create/', CompanyCreateView.as_view(), name='create'),
+    path(r'<int:pk>/update/', CompanyUpdateView.as_view(), name='update'),
+    path(r'<int:pk>/delete/', CompanyDeleteView.as_view(), name='delete'),
 ]
