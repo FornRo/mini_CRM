@@ -24,7 +24,6 @@ class CooperationListView(generic.ListView):
     filter_class = CooperationFilterSet
     filter_obj = None
 
-
     def get_queryset(self):
         self.filter_obj = self.filter_class(self.request.GET, queryset=self.model.objects.all())
         return self.filter_obj.qs
