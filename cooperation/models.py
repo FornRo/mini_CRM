@@ -5,32 +5,34 @@ from ckeditor.fields import RichTextField
 from do_projects.models import DoProject
 
 
+CHANNEL = (
+        ('c', 'correspondence'),
+        ('p', 'phone'),
+        ('i', 'company initiative'),
+        ('m', 'mail'),
+        ('e', 'email'),
+    )
+
+RATING = (
+    ('+5', 'masterpiece'),
+    ('+4', 'great'),
+    ('+3', 'very good'),
+    ('+2', 'good'),
+    ('+1', 'not bad'),
+    ('0', 'mediocre'),
+    ('-1', 'no way'),
+    ('-2', 'bad'),
+    ('-3', 'terrible'),
+    ('-4', 'negligible'),
+)
+
+
 class Cooperation(models.Model):
     project = models.ForeignKey(DoProject, on_delete=models.SET_NULL, null=True)
     # company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True)
     name_manager = models.CharField(max_length=200)
     description = RichTextField(blank=True, null=True)
-    CHANNEL = (
-        ('c', 'correspondence'),
-        ('p', 'phone'),
-        ('p', 'calls'),
-        ('m', 'mail'),
-        ('e', 'email'),
-    )
-    Channel_of_usage = models.CharField(max_length=1, choices=CHANNEL, blank=True, default='m')
-
-    RATING = (
-        ('+5', 'masterpiece'),
-        ('+4', 'great'),
-        ('+3', 'very good'),
-        ('+2', 'good'),
-        ('+1', 'not bad'),
-        ('0', 'mediocre'),
-        ('-1', 'no way'),
-        ('-2', 'bad'),
-        ('-3', 'terrible'),
-        ('-4', 'negligible'),
-    )
+    channel_of_usage = models.CharField(max_length=1, choices=CHANNEL, blank=True, default='m')
     rating = models.CharField(max_length=2, choices=RATING, blank=True, default='0')
     created_date = models.DateField(auto_now_add=True)
 
@@ -38,4 +40,4 @@ class Cooperation(models.Model):
         ordering = ['created_date']
 
     def __str__(self):
-        return f'{self.id} | {self.project} in {self.project.company}'
+        return f'{self.id} | {self.project.id} | {self.project.company.id}'
