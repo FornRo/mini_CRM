@@ -2,12 +2,32 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .models import Company
+from .filters import *
+
+__all__ = [
+    'CompanyListView',
+    'CompanyDetailView',
+    'CompanyCreateView',
+    'CompanyUpdateView',
+    'CompanyDeleteView',
+]
 
 
 class CompanyListView(generic.ListView):
     template_name = 'customer_info/list.html'
     model = Company
     paginate_by = 10
+    filter_class = CompanyFilter
+    filter_obj = None
+
+    def get_queryset(self):
+        self.filter_obj = self.filter_class(self.request.GET, queryset=self.model.objects.all())
+        return self.filter_obj.qs
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = self.filter_obj
+        return context
 
 
 class CompanyDetailView(generic.DetailView):
