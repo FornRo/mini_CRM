@@ -21,10 +21,24 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import IndexView
 
+
 urlpatterns = [
     path('', IndexView.as_view(), name='home'),
     path('admin/', admin.site.urls),
-    path('customer_info/', include(('customer_info.urls', 'customer_info'))),
+
+    path(r'customer_info/', include(
+        ('customer_info.urls', 'customer_info')
+    )),
+
+    path(r'do_projects/', include(
+        ('do_projects.urls', 'do_projects')
+    )),
+
+    path(r'cooperation/', include(
+        ('cooperation.urls', 'cooperation')
+    )),
+
+
 
     # path('', RedirectView.as_view(url='/customer_info/', permanent=True)),
 ]
