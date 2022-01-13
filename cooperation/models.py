@@ -6,12 +6,12 @@ from do_projects.models import DoProject
 
 
 CHANNEL = (
-        ('c', 'correspondence'),
-        ('p', 'phone'),
-        ('i', 'company initiative'),
-        ('m', 'mail'),
-        ('e', 'email'),
-    )
+    ('c', 'correspondence'),
+    ('p', 'phone'),
+    ('i', 'company initiative'),
+    ('m', 'mail'),
+    ('e', 'email'),
+)
 
 RATING = (
     ('+5', 'masterpiece'),
