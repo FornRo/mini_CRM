@@ -5,7 +5,7 @@ from django.views import generic
 from django.views.generic.list import MultipleObjectMixin
 
 from .models import Company
-from .filters import CompanyFilter
+from .filters import *
 
 __all__ = [
     'CompanyListView',
@@ -20,19 +20,16 @@ class CompanyListView(generic.ListView):
     template_name = 'customer_info/list.html'
     model = Company
     paginate_by = 10
+    filter_class = CompanyFilter
+    filter_obj = None
+
+    def get_queryset(self):
+        self.filter_obj = self.filter_class(self.request.GET, queryset=self.model.objects.all())
+        return self.filter_obj.qs
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(CompanyListView, self).get_context_data(**kwargs)
-
-        filter_company = CompanyFilter(self.request.GET, queryset=self.get_queryset())
-        paginated_filter_company = Paginator(filter_company.qs, self.paginate_by)
-        page_number = self.request.GET.get('page')
-        company_page_obj = paginated_filter_company.get_page(page_number)
-
-        context['filter'] = filter_company
-        context['object_list'] = company_page_obj
-        context['page_obj'] = company_page_obj
-
+        context = super().get_context_data(**kwargs)
+        context['filter'] = self.filter_obj
         return context
 
 
