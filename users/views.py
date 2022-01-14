@@ -1,43 +1,37 @@
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .models import DoProject
+from .models import Profile
 
 __all__ = [
-    'ProjectListView',
-    'ProjectDetailView',
-    'ProjectCreateView',
-    'ProjectUpdateView',
-    'ProjectDeleteView',
+    'UserListView',
+    'UserCreateView',
+    'UserUpdateView',
+    'UserDeleteView',
 ]
 
 
 class UserListView(generic.ListView):
-    template_name = 'do_projects/list.html'
-    model = DoProject
+    template_name = 'users/list.html'
+    model = Profile
     paginate_by = 10
 
 
-class ProjectDetailView(generic.DetailView):
-    template_name = 'do_projects/detail.html'
-    model = DoProject
-
-
-class ProjectCreateView(generic.CreateView):
+class UserCreateView(generic.CreateView):
     template_name = 'layouts/form.html'
-    model = DoProject
+    model = Profile
     fields = '__all__'
-    success_url = reverse_lazy('do_projects:list')
+    success_url = reverse_lazy('user:list')
 
 
-class ProjectUpdateView(generic.UpdateView):
+class UserUpdateView(generic.UpdateView):
     template_name = 'layouts/form.html'
-    model = DoProject
+    model = Profile
     fields = '__all__'
-    success_url = reverse_lazy('do_projects:list')
+    success_url = reverse_lazy('user:list')
 
 
-class ProjectDeleteView(generic.DeleteView):
+class UserDeleteView(generic.DeleteView):
     template_name = 'layouts/confirm_delete.html'
-    model = DoProject
-    success_url = reverse_lazy('do_projects:list')
+    model = Profile
+    success_url = reverse_lazy('user:list')
