@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'customer_info',
     'do_projects',
     'cooperation',
+    'users',
 ]
 
 MIDDLEWARE = [
