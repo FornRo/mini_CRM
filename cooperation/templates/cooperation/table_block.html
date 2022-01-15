@@ -1,0 +1,48 @@
+{% load static %}
+
+{% if object_list %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">company</th>
+            <th scope="col">project</th>
+            <th scope="col">name_manager</th>
+            <th scope="col">Channel_of_usage</th>
+            <th scope="col">rating</th>
+            <th scope="col">created_date</th>
+            <th scope="col">#</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td><a href="{% url 'cooperation:detail' pk=object.id %}">Info</a></td>
+                <td><a href="{% url 'customer_info:detail' pk=object.project.company.id %}">{{ object.project.company.name_company }}</a></td>
+                <td><a href="{% url 'do_projects:detail' pk=object.project.id %}">{{ object.project.name_project }}</a></td>
+                <td>{{ object.name_manager }}</td>
+                <td>{{ object.channel_of_usage }}</td>
+                <td>{{ object.rating }}</td>
+                <td>{{ object.created_date }}</td>
+                <td>
+
+                    {% if perms.cooperation.change_cooperation %}
+                        <label>update</label>
+                        <a href="{% url 'cooperation:update' pk=object.id %}"><img src="{% static 'img/update.svg' %}" height="25" alt=""></a>
+                    {% endif %}
+
+                    {% if perms.cooperation.delete_cooperation %}
+                        <label for="">del</label>
+                        <a href="{% url 'cooperation:delete' pk=object.id %}"><img src="{% static 'img/delete.svg' %}" height="25" alt=""></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <p class="link-warning">Don't have records</p>
+
+{% endif %}

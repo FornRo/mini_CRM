@@ -9,49 +9,9 @@
         <button type="submit" value="Submit" class="btn btn-success"><img src="{% static 'img/check-circled.svg' %}" alt="submit" height="30"></button>
     </form>
 
-    {% if object_list %}
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">company</th>
-              <th scope="col">project</th>
-              <th scope="col">name_manager</th>
-              <th scope="col">Channel_of_usage</th>
-              <th scope="col">rating</th>
-              <th scope="col">created_date</th>
-              <th scope="col">#</th>
-            </tr>
-          </thead>
+    {% include 'cooperation/table_block.html' %}
 
-          <tbody>
-            {% for object in object_list %}
-                <tr>
-                  <td><a href="{% url 'cooperation:detail' pk=object.id %}">Info</a></td>
-                  <td><a href="{% url 'cooperation:list_company' pk=object.project.company.id %}">{{ object.project.company.name_company }}</a></td>
-                  <td><a href="{% url 'cooperation:list_project' pk=object.project.id %}">{{ object.project.name_project }}</a></td>
-                  <td>{{ object.name_manager }}</td>
-                  <td>{{ object.channel_of_usage }}</td>
-                  <td>{{ object.rating }}</td>
-                  <td>{{ object.created_date }}</td>
-                  <td>
-                      <label>update</label>
-                      <a href="{% url 'do_projects:update' pk=object.id %}"><img src="{% static 'img/update.svg' %}" height="25" alt=""></a>
-                      <label for="">del</label>
-                      <a href="{% url 'do_projects:delete' pk=object.id %}"><img src="{% static 'img/delete.svg' %}" height="25" alt=""></a>
-                      <i class="icofont-delete"></i>
-                  </td>
-                </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-
-    {% else %}
-        <p class="link-warning">Don't have records</p>
-
-    {% endif %}
-
-{% include 'layouts/_pagination.html' %}
+    {% include 'layouts/_pagination.html' %}
 
 {% endblock %}
 
