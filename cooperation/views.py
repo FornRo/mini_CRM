@@ -38,7 +38,7 @@ class CooperationListView(PermissionRequiredMixin, generic.ListView):
 
 
 class CooperationByCompanyListView(PermissionRequiredMixin, generic.View):
-    template_name = 'cooperation/list_company.html'
+    template_name = 'cooperation/list_filtered.html'
     model = Cooperation
     paginate_by = 10
     login_url = reverse_lazy('profile:login')
@@ -54,7 +54,7 @@ class CooperationByCompanyListView(PermissionRequiredMixin, generic.View):
 
 
 class CooperationByProjectListView(PermissionRequiredMixin, generic.View):
-    template_name = 'cooperation/list_project.html'
+    template_name = 'cooperation/list_filtered.html'
     model = Cooperation
     paginate_by = 10
     login_url = reverse_lazy('profile:login')
