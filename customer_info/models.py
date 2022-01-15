@@ -25,9 +25,6 @@ class Company(models.Model):
 class PhoneNumber(models.Model):
     phone_number = models.CharField(max_length=13)
 
-    class Meta:
-        verbose_name_plural = 'Phone Number`s'
-
     def __str__(self):
         return self.phone_number
 
