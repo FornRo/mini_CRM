@@ -37,15 +37,19 @@
             </tr>
 
             {% for values in object.phone_number.iterator %}
-            <tr class="table-info">
-                <td class="mb-lg-0">{{ values }}</td>
-            </tr>
+                <tr class="table-info">
+                    <td class="mb-lg-0">{{ values }}</td>
+                </tr>
             {% endfor %}
 
             <tr>
-                <th scope="row">e_mail</th>
-                <td>{{ object.e_mail__set }}</td>
+                <th scope="row">phone_number</th>
             </tr>
+            {% for values in object.e_mail.iterator %}
+                <tr class="table-info">
+                    <td class="mb-lg-0">{{ values }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}
