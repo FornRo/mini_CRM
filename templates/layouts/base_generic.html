@@ -1,144 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <title>
-      {% block title %}mini_crm{% endblock %}
-  </title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- <!-- Bootstrap CSS -->
+    <title>
+        {% block title %}mini_crm{% endblock %}
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <!-- some fix in base Bootstrap -->
-      <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+    <!-- some fix in base Bootstrap -->
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
         }
-      }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <nav class="container">
-        <div class="navbar sticky-top shadow">
-            {% load static %}
+
+{% include 'includes/header.html' %}
 
 
-            <div>
-                <a href="">login</a>
-                <a href="">sing up</a>
-            </div>
-
-            <div>
-                <a href="">sing up</a>
-                <a href="">sing up</a>
-            </div>
-
-
-        </div>
-    </nav>
-
-    <header class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-
-
-
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/admin/">Dj_Admin</a>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">test_ink</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="{% url 'customer_info:list' %}" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">Company</a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{% url 'customer_info:list' %}">Company</a></li>
-                    <li><a class="dropdown-item" href="{% url 'customer_info:create' %}">create</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Company_filter</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">do_project</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'do_projects:list' %}">Project</a></li>
-                        <li><a class="dropdown-item" href="{% url 'do_projects:create' %}">create</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Project_filter</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cooperation</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'cooperation:list' %}">Cooperation</a></li>
-                        <li><a class="dropdown-item" href="{% url 'cooperation:create' %}">create</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item disabled" href="#">Manager_filter</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">user_manager</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Manager</a></li>
-                        <li><a class="dropdown-item" href="#">create</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Manager_filter</a></li>
-                    </ul>
-                </li>
-              </ul>
-{#              <form class="d-flex">#}
-{#                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
-{#                <button class="btn btn-outline-light" type="submit">Search</button>#}
-{#              </form>#}
-            </div>
-        </div>
-    </header>
-
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-              <div class="position-sticky pt-3">
-
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3">
                 {% block sidebar %}
                     <ul class="nav flex-column">
-
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
-
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">any_sidebar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">any_sidebar</a>
+                            <a class="nav-link" aria-current="page" href="#">any_sidebar</a>
                         </li>
                     </ul>
                 {% endblock %}
-              </div>
-            </nav>
+            </div>
+        </nav>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                {% block content %}
-                    <h1>base_generic.html</h1>
-                {% endblock %}
-            </main>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            {% block content %}
+                <h1>base_generic.html</h1>
+            {% endblock %}
+        </main>
 
-        </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
