@@ -12,7 +12,7 @@ class CompanyFilter(FilterSet):
         ('descending', 'Descending'),
     )
     name_company = ChoiceFilter(label='Name_company', choices=CHOICES, method='filter_by_order')
-    name = ChoiceFilter(label='name', choices=CHOICES, method='filter_by_order')
+    name = ChoiceFilter(label='Name', choices=CHOICES, method='filter_by_order')
 
     class Meta:
         model = Company
@@ -20,5 +20,5 @@ class CompanyFilter(FilterSet):
         }
 
     def filter_by_order(self, qs, name, val):
-        expression = f'{name}' if val == 'True' else f'-{name}'
+        expression = f'{name}' if val == 'ascending' else f'-{name}'
         return qs.order_by(expression)
