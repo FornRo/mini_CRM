@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -17,16 +18,17 @@ __all__ = [
 ]
 
 
-class CooperationListView(generic.ListView):
+class CooperationListView(PermissionRequiredMixin, generic.ListView):
     template_name = 'cooperation/list.html'
     model = Cooperation
     paginate_by = 10
-    filter_class = CooperationFilterSet
+    filterset_class = CooperationFilterSet
     filter_obj = None
-
+    login_url = reverse_lazy('profile:login')
+    permission_required = 'cooperation.view_cooperation'
 
     def get_queryset(self):
-        self.filter_obj = self.filter_class(self.request.GET, queryset=self.model.objects.all())
+        self.filter_obj = self.filterset_class(self.request.GET, queryset=self.model.objects.all())
         return self.filter_obj.qs
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -35,10 +37,12 @@ class CooperationListView(generic.ListView):
         return context
 
 
-class CooperationByCompanyListView(generic.View):
+class CooperationByCompanyListView(PermissionRequiredMixin, generic.View):
     template_name = 'cooperation/list_company.html'
     model = Cooperation
     paginate_by = 10
+    login_url = reverse_lazy('profile:login')
+    permission_required = 'cooperation.view_cooperation'
 
     def get(self, rq, pk: int):
         object_list = Cooperation.objects.select_related('project').filter(project__company=pk)
@@ -49,10 +53,12 @@ class CooperationByCompanyListView(generic.View):
         return render(rq, self.template_name, context=context)
 
 
-class CooperationByProjectListView(generic.View):
+class CooperationByProjectListView(PermissionRequiredMixin, generic.View):
     template_name = 'cooperation/list_project.html'
     model = Cooperation
     paginate_by = 10
+    login_url = reverse_lazy('profile:login')
+    permission_required = 'cooperation.view_cooperation'
 
     def get(self, rq, pk):
         object_list = self.model.objects.select_related('project').filter(project=pk)
@@ -63,30 +69,38 @@ class CooperationByProjectListView(generic.View):
         return render(rq, self.template_name, context=context)
 
 
-class CooperationDetailView(generic.DetailView):
+class CooperationDetailView(PermissionRequiredMixin, generic.DetailView):
     template_name = 'cooperation/detail.html'
     model = Cooperation
+    login_url = reverse_lazy('profile:login')
+    permission_required = 'cooperation.view_cooperation'
 
 
 # create update delete
-class CooperationCreateView(generic.CreateView):
+class CooperationCreateView(PermissionRequiredMixin, generic.CreateView):
     template_name = 'layouts/form.html'
     model = Cooperation
     fields = '__all__'
     success_url = reverse_lazy('cooperation:list')
+    login_url = reverse_lazy('profile:login')
+    permission_required = 'cooperation.add_cooperation'
 
 
-class CooperationUpdateView(generic.UpdateView):
+class CooperationUpdateView(PermissionRequiredMixin, generic.UpdateView):
     template_name = 'layouts/form.html'
     model = Cooperation
     fields = '__all__'
     success_url = reverse_lazy('cooperation:list')
+    login_url = reverse_lazy('profile:login')
+    permission_required = 'cooperation.change_cooperation'
 
 
 class CooperationDeleteView(generic.DeleteView):
     template_name = 'layouts/confirm_delete.html'
     model = Cooperation
     success_url = reverse_lazy('cooperation:list')
+    login_url = reverse_lazy('profile:login')
+    permission_required = 'cooperation.delete_cooperation'
 
 
 
