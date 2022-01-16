@@ -11,7 +11,6 @@ def parameters_url_filter(value, field_name, urlencode=None):
         querystring = urlencode.split('&')
         filtered_querystring = filter(lambda p: p.split('=')[0] != field_name, querystring)
         encoded_querystring = '&'.join(filtered_querystring)
-        print(encoded_querystring)
         url = f'{url}&{encoded_querystring}' if encoded_querystring else url
     return url
 

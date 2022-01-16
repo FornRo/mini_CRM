@@ -1,0 +1,41 @@
+{% extends "layouts/base_generic.html" %}
+
+{% block content %}
+    <h3 class="text-info">Cooperation</h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">first_name</th>
+                <td>{{ object.first_name }}</td>
+            </tr>
+            <tr>d
+                <th scope="row">last_name</th>
+                <td>{{ object.last_name}}</td>
+            </tr>
+            <tr>
+                <th scope="row">email</th>
+                <td>{{ object.email }}</td>
+            </tr>
+            <tr>
+                <th scope="row">channel_of_usage</th>
+                <td>{{ object.channel_of_usage }}</td>
+                <td><snap>correspondence, phone, company initiative, mail, email</snap></td>
+            </tr>
+            <tr>
+                <th scope="row">rating</th>
+                <td>{{ object.rating }}</td>
+                <td>masterpiece, great, very good, good, not bad, mediocre no way, bad, terrible, negligible</td>
+
+            </tr>
+            <tr>
+                <th scope="row">created_date</th>
+                <td>{{ object.created_date }}</td>
+            </tr>
+            <tr>
+                <th scope="row">description</th>
+                <td>{{ object.description }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+{% endblock %}

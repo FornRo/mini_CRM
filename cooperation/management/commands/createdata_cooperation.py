@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
 
 from faker import Faker
 from random import randint, choice
@@ -18,13 +19,14 @@ class Command(BaseCommand):
         self.generate_cooperation()
 
     def generate_cooperation(self) -> None:
+        count_user = User.objects.count()
         count_do_project = DoProject.objects.count()
         if Cooperation.objects.count() == 0:
             Cooperation.objects.bulk_create(
                 [
                     Cooperation(
                         project=DoProject.objects.get(id=randint(1, count_do_project)),
-                        name_manager=self.fake.name(),
+                        name_manager=User.objects.get(id=randint(1, count_user)),
                         description=self.fake.text(max_nb_chars=200),
                         channel_of_usage=choice([val[0] for val in CHANNEL]),
                         rating=choice([val[0] for val in RATING]),
