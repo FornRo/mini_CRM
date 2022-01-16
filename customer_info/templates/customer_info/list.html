@@ -31,11 +31,18 @@
                     {% endif %}
                     <td>{{ object.description }}</td>
                     <td>
-                        <label>update</label>
-                        <a href="{% url 'customer_info:update' pk=object.id %}"><img src="{% static 'img/update.svg' %}" height="25" alt=""></a>
+
+                        {% if perms.customer_info.change_company %}
+                            <label>update</label>
+                            <a href="{% url 'customer_info:update' pk=object.id %}"><img src="{% static 'img/update.svg' %}" height="25" alt=""></a>
+                        {% endif %}
+
+                        {% if perms.customer_info.delete_company %}
                         <label for="">del</label>
-                        <a href="{% url 'customer_info:delete' pk=object.id %}"><img src="{% static 'img/delete.svg' %}" height="25" alt=""></a>
-                        <i class="icofont-delete"></i>
+                            <a href="{% url 'customer_info:delete' pk=object.id %}"><img src="{% static 'img/delete.svg' %}" height="25" alt=""></a>
+                            <i class="icofont-delete"></i>
+                        {% endif %}
+
                     </td>
                 </tr>
             {% endfor %}
