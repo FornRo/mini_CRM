@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from ckeditor.fields import RichTextField
 # from customer_info.models import Company
@@ -29,8 +30,7 @@ RATING = (
 
 class Cooperation(models.Model):
     project = models.ForeignKey(DoProject, on_delete=models.SET_NULL, null=True)
-    # company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True)
-    name_manager = models.CharField(max_length=200)
+    name_manager = models.ForeignKey(User, on_delete=models.CASCADE)
     description = RichTextField(blank=True, null=True)
     channel_of_usage = models.CharField(max_length=1, choices=CHANNEL, blank=True, default='m')
     rating = models.CharField(max_length=2, choices=RATING, blank=True, default='0')
