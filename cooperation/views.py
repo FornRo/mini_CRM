@@ -15,6 +15,7 @@ __all__ = [
     'CooperationDeleteView',
     'CooperationByCompanyListView',
     'CooperationByProjectListView',
+    'CooperationByUserListView',
 ]
 
 
@@ -62,6 +63,22 @@ class CooperationByProjectListView(PermissionRequiredMixin, generic.View):
 
     def get(self, rq, pk):
         object_list = self.model.objects.select_related('project').filter(project=pk)
+        context = {
+            'object_list': object_list,
+            'page_obj': Paginator(object_list, self.paginate_by)
+        }
+        return render(rq, self.template_name, context=context)
+
+
+class CooperationByUserListView(PermissionRequiredMixin, generic.View):
+    template_name = 'cooperation/list_filtered.html'
+    model = Cooperation
+    paginate_by = 10
+    login_url = reverse_lazy('profile:login')
+    permission_required = 'cooperation.view_cooperation'
+
+    def get(self, rq, pk):
+        object_list = self.model.objects.select_related('project').filter(name_manager=pk)
         context = {
             'object_list': object_list,
             'page_obj': Paginator(object_list, self.paginate_by)
