@@ -18,10 +18,19 @@
         <tbody>
         {% for object in object_list %}
             <tr>
-                <td><a href="{% url 'cooperation:detail' pk=object.id %}">Info</a></td>
-                <td><a href="{% url 'customer_info:detail' pk=object.project.company.id %}">{{ object.project.company.name_company }}</a></td>
-                <td><a href="{% url 'do_projects:detail' pk=object.project.id %}">{{ object.project.name_project }}</a></td>
-                <td>{{ object.name_manager }}</td>
+                <td><a class="link-info" href="{% url 'cooperation:detail' pk=object.id %}">Info</a></td>
+                <td>
+                    <a class="link-info" href="{% url 'customer_info:detail' pk=object.project.company.id %}">detail</a>
+                    <a href="{% url 'cooperation:list_company' pk=object.project.company.id %}">{{ object.project.company.name_company }}</a>
+                </td>
+                <td>
+                    <a class="link-info" href="{% url 'do_projects:detail' pk=object.project.id %}">detail</a>
+                    <a href="{% url 'cooperation:list_project' pk=object.project.id %}">{{ object.project.name_project }}</a>
+                </td>
+                <td>
+                    <a class="link-info" href="#">detail</a>
+                    <a href="{% url 'cooperation:list_user' pk=object.name_manager.id %}">{{ object.name_manager.first_name }}{{ object.name_manager.last_name }}</a>
+                </td>
                 <td>{{ object.channel_of_usage }}</td>
                 <td>{{ object.rating }}</td>
                 <td>{{ object.created_date }}</td>
